@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  header {
+    padding: 1em;
+    text-align: center;
+    background-color: #333;
+    color: white;
+  }
+  
+  #search {
+    margin-top: 10px;
+    padding: 10px;
+    width: 80%;
+    max-width: 500px;
+  }
+  
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    padding: 1em;
+    justify-content: center;
+  }
+  
+  .review {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1em;
+    width: 300px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review h2 {
+    margin-top: 0;
+  }
+  
