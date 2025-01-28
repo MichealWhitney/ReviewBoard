@@ -1,42 +1,516 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
+body, html {
+  background-color: var(--primary-bg); 
+  color: var(--primary-text); 
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding: 1em;
+  justify-content: center;
+  background-color: var(--primary-bg);
+}
+
+:root {
+  --primary-bg: #F8FAFC;
+  --primary-text: #333;
+
+  --red-button: #E78F81;
+  --red-button-hover: #FF6969;
+
+  --blue-button: #C4D7FF;
+  --blue-button-hover: #87A2FF;
+
+  --green-button: #A0D683;
+  --green-button-hover: #72BF78;
+}
+
+.hidden {
+  display: none !important;
+}
+
+img {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ------------------------------------------------------------------------------------------------------ */
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  position: relative; 
+  padding: 30px;
+  background-color: #f4f2e9;
+  color: var(--primary-text); 
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 100%; 
+  max-width: 1200px; 
+}
+
+/* header-left contains the add review button */
+.header-left {
+  position: absolute; 
+  left: 80px; 
+  top: 50%; 
+  transform: translateY(-50%);
+}
+
+/* header-center contains the filter options */
+.header-center {
+  display: flex;
+  flex-direction: column; /* Stack rows vertically */
+  align-items: center;
+  text-align: center;
+}
+
+/* single row of filter options in the center of the header */
+.filter-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* center text input in all header */
+header input[type="text"],
+header input[type="number"],
+header select {
+  text-align: center; /* Center-align text inside inputs */
+}
+
+header input[type="number"] {
+  width: 100px; 
+}
+
+header input, header select {
+  padding: 0.5em;
+  border-radius: 5px;
+  border: 1px solid #ccc; 
+  background: #fff; 
+  color: #333;
+  font-size: 1rem;
+}
+
+#clear-filter-btn {
+  background-color: var(--red-button);
+  color: #333;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  border: none;
+  margin-top: 15px;
+  min-width: 200px;
+  text-align: center;
+}
+
+#clear-filter-btn:hover {
+  background-color: var(--red-button-hover)
+}
+
+#add-review-btn {
+  background-color: var(--blue-button);
+  color: var(--primary-text);
+  cursor: pointer;
+  height: 90px;
+  font-size: 1rem;
+  padding: 0.5em;
+  border: none;
+  border-radius: 5px;
+}
+
+#add-review-btn:hover {
+  background-color: var(--blue-button-hover);
+}
+
+/* End of Header Styling */
+/* ------------------------------------------------------------------------------------------------------ */
+
+
+/* ------------------------------------------------------------------------------------------------------ */
+/* Review Tile Styling Starts */
+.review {
+  background: #FFFFFF; 
+  color: var(--primary-text);
+  border-radius: 10px; 
+  padding: 15px;
+  width: 280px; 
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(145deg, #fdfdfd, #f1f1f1);
+}
   
-  header {
-    padding: 1em;
-    text-align: center;
-    background-color: #333;
-    color: white;
-  }
-  
-  #search {
-    margin-top: 10px;
-    padding: 10px;
-    width: 80%;
-    max-width: 500px;
-  }
-  
-  main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-    padding: 1em;
-    justify-content: center;
-  }
-  
-  .review {
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 1em;
-    width: 300px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .review h2 {
-    margin-top: 0;
-  }
-  
+/* Tile Hover Effect */
+.review:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); 
+  transform: scale(1.01);
+}
+
+/* Image Styling */
+.review img {
+  width: auto; 
+  height: 425px; 
+  max-width: 100%; 
+  display: block; 
+  margin: auto; 
+  object-fit: contain; 
+  background-color: #ececec;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Title of review */
+.review h2 {
+  font-size: 1.7rem;
+  margin: 10px 0;
+  text-align: center;
+  color: var(--primary-text);
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #000000; /* Separator line */
+}
+
+/* Text details of review */
+.review p {
+  font-size: 1rem;
+  color: var(--primary-text);
+  margin: 5px 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Labels for the review tiles */
+.review p strong {
+  color: #111; 
+}
+
+/* Disable hover and pointer events when detailed panel is open */
+#detailed-review-panel:not(.hidden) + #reviews-container .review:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Disable pointer events */
+#detailed-review-panel:not(.hidden) + #reviews-container .review {
+  pointer-events: none;
+}
+
+/* colored badge that shows the score */
+.score-badge {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #333;
+}
+.high-score {
+  background-color: #88D66C; 
+}
+.medium-score {
+  background-color: #FFC96F; 
+}
+.low-score {
+  background-color: #E78F81;
+}
+/* Review Tile Styling Ends */
+/* ------------------------------------------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------------------------------------------ */
+/* Add Review Panel Styling Starts */
+#add-review-panel {
+  position: fixed;
+  top: 5%; 
+  left: 10%;
+  width: 80%;
+  height: 90%;
+  background-color: white;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-review-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+}
+
+.add-review-layout {
+  display: flex;
+  flex-direction: row; 
+  flex-grow: 1;
+  gap: 20px; 
+  padding: 20px;
+}
+
+/* Left side contains title, creator, type, genre, etc input fields */
+.add-review-left {
+  flex: 0.4; 
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add-review-left input,
+.add-review-left select {
+  width: 90%;
+}
+
+.add-review-left label {
+  font-weight: bold;
+}
+
+/* Increase font size for labels and inputs on the left side */
+#add-review-panel label,
+#add-review-panel input,
+#add-review-panel select,
+#add-review-panel .genre-container {
+  font-size: 1.1rem; 
+  line-height: 1.4;
+}
+
+/* Right side contains short and full review text boxes */
+.add-review-right {
+  flex: 1.3; 
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+}
+
+textarea, input, select {
+  background-color: #F8FAFC;
+  border: 1px solid #E5E7EB;
+  padding: 10px;
+  border-radius: 5px;
+  color: #333;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+  font-size: 1.1rem; 
+  line-height: 1.3; 
+}
+
+#short-review {
+  height: 90px; 
+}
+
+#full-review {
+  height: 400px;
+}
+
+.add-review-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px; 
+  padding: 15px 0;
+  border-radius: 12px;
+}
+
+#save-review-btn,
+#delete-review-btn,
+#close-panel-btn {
+  border: none; 
+  border-radius: 12px;
+  padding: 12px 25px; 
+  font-size: 16px; 
+  color: #333; 
+  cursor: pointer;
+}
+
+#save-review-btn {
+  background-color: var(--green-button);
+}
+#save-review-btn.btn:hover {
+  background-color: var(--green-button-hover);
+}
+
+#delete-review-btn {
+  background-color: var(--red-button)	;
+}
+#delete-review-btn.btn:hover {
+  background-color: var(--red-button-hover)	;
+}
+
+#close-panel-btn {
+  background-color: var(--blue-button);
+}
+#close-panel-btn.btn:hover {
+  background-color: var(--blue-button-hover);
+}
+
+/* Prevent Hover Effects */
+#add-review-panel:not(.hidden) + #reviews-container .review:hover {
+  transform: none;
+  box-shadow: none;
+}
+#add-review-panel:not(.hidden) + #reviews-container .review {
+  pointer-events: none;
+}
+
+/* Genre Container Stuff */
+#genres-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.genre-tag {
+  background-color: #E5E7EB;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 5px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.genre-tag span {
+  margin-right: 5px;
+}
+
+.genre-tag button {
+  background: none;
+  border: none;
+  color: var(--red-button);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
+/* Add Review Panel ends */
+/* ------------------------------------------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------------------------------------------ */
+/* Detailed Review Panel Starts */
+#detailed-review-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: #F5F5F5;
+}
+
+.detailed-panel-content {
+  background: white;
+  color: var(--primary-text);
+  width: 95%;
+  max-width: 1200px;
+  height: 85%;
+  border-radius: 10px;
+  display: flex;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* left side of detailed panel is everything except the full review */
+.detailed-left {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-right: 2px solid #ddd;
+}
+
+.detailed-left img {
+  width: 100%;
+  max-height: 440px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* title of review item */
+.detailed-left h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* metadata such as creator, genre, score */
+.detailed-left p {
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+/* right side of detailed panel is the full review*/
+.detailed-right {
+  width: 60%;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* right side text */
+.detailed-right p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Detailed Buttons Section */
+.detailed-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.detailed-buttons .btn {
+  display: inline-block;
+  color: #333;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.detailed-buttons .btn {
+  background-color: var(--blue-button);
+}
+
+.detailed-buttons .btn:hover {
+  background-color:var(--blue-button-hover);
+}
+
+#edit-review-btn {
+  background-color: var(--green-button);
+}
+
+#edit-review-btn:hover {
+  background-color: var(--green-button-hover);
+}
+/* Detailed Panel View Ends */
+/* ------------------------------------------------------------------------------------------------------ */

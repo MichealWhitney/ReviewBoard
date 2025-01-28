@@ -3,14 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Media Reviews</title>
+  <title>ReviewBoard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Media Reviews</h1>
-    <input type="text" id="search" placeholder="Search reviews...">
+
+  <header class="header">
+    <div class="header-left">
+      <button id="add-review-btn" class="btn">Add New Review</button>
+    </div>
+    <div class="header-center">
+      <input type="text" id="search" placeholder="Search reviews..." class="search-bar">
+      <div class="filter-row">
+        <select id="filter-type">
+          <option value="">All Types</option>
+          <option value="Movie">Movie</option>
+          <option value="Book">Book</option>
+          <option value="Game">Game</option>
+          <option value="Album">Album</option>
+        </select>
+        <select id="sort-options">
+          <option value="recent">Sort by Recently Added</option>
+          <option value="score-desc">Sort by Highest Score</option>
+          <option value="score-asc">Sort by Lowest Score</option>
+        </select>        
+      </div>
+      <div class="filter-row">
+        <input type="number" id="filter-score-min" placeholder="Min Score">
+        <input type="number" id="filter-score-max" placeholder="Max Score">
+        <input type="text" id="filter-genres" placeholder="Genres (comma-separated)">
+      </div>
+      <button id="clear-filter-btn" class="btn">Clear Filters</button>
+    </div>
   </header>
+  
+
+  <div id="detailed-review-panel" class="hidden">
+    <div class="detailed-panel-content">
+      <div class="detailed-left">
+        <img id="thumbnail" src="" alt="Thumbnail" />
+        <h2 id="detailed-title"></h2>
+        <p><strong>Creator:</strong> <span id="detailed-creator"></span></p>
+        <p><strong>Genre:</strong> <span id="detailed-genre"></span></p>
+        <p><strong>Score:</strong> <span id="detailed-score"></span></p>
+        <p><strong>Completion Date:</strong> <span id="detailed-date"></span></p>
+        <div class="detailed-buttons">
+          <button id="close-detailed-panel-btn" class="btn">Back</button>
+          <button id="edit-review-btn" class="btn">Edit Review</button>
+        </div>
+      </div>
+      <div class="detailed-right">
+        <p id="detailed-full-review"></p>
+      </div>
+    </div>
+  </div>  
+  
+
+  <div id="add-review-panel" class="hidden">
+    <div class="add-review-content">
+      <h2 class="panel-title">Add New Review</h2>
+      <div class="add-review-layout">
+        
+        <!-- Left Side -->
+        <div class="add-review-left">
+          <label for="title">Title:</label>
+          <input type="text" id="title" placeholder="Title">
+  
+          <label for="creator">Creator:</label>
+          <input type="text" id="creator" placeholder="Creator of work">
+  
+          <label for="type">Type:</label>
+          <select id="type">
+            <option>Movie</option>
+            <option>Book</option>
+            <option>Game</option>
+            <option>Album</option>
+          </select>
+  
+          <label for="genres">Genres:</label>
+          <div id="genres-container">
+            <!-- Tags will be dynamically added here -->
+          </div>
+
+          <input type="text" id="genres" placeholder="Add genres and press Enter">
+  
+          <label for="completion-date">Completion Date:</label>
+          <input type="date" id="completion-date">
+  
+          <label for="score">Score (out of 5.0):</label>
+          <input type="number" id="score" step="0.1" min="0" max="5">
+  
+          <label for="thumbnail-url">Thumbnail URL:</label>
+          <input type="text" id="thumbnail-url" placeholder="Enter thumbnail file name (e.g., image.jpg)">
+        </div>
+  
+        <!-- Right Side -->
+        <div class="add-review-right">
+          <label for="short-review">Short Review:</label>
+          <textarea id="short-review" placeholder="Short Review"></textarea>
+  
+          <label for="full-review">Full Review:</label>
+          <textarea id="full-review" placeholder="Write your detailed thoughts here..." spellcheck="true"></textarea>
+  
+          <div class="add-review-buttons">
+            <button id="save-review-btn" class="btn green">Save Review</button>
+            <button id="delete-review-btn" class="btn red hidden">Delete Review</button>
+            <button id="close-panel-btn" class="btn red">Close</button>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </div>  
+
   <main id="reviews-container"></main>
   <script src="app.js"></script>
 </body>
