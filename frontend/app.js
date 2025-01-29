@@ -357,33 +357,39 @@ function applyFilters() {
 
 // Display the review tiles on the main page
 function displayReviews(reviews) {
-  reviewsContainer.innerHTML = "";
+  reviewsContainer.innerHTML = ""; // Clear existing reviews
+
   reviews.forEach((review) => {
     // Prepend the correct path dynamically
     const thumbnailSrc = `images/${review.thumbnail_url}`;
 
-    // Determine score class based on the review score
-    let scoreClass = "";
+    // Clone the template
+    const template = document.getElementById("review-template").content.cloneNode(true);
+
+    // Populate the template with review data
+    template.querySelector(".review-thumbnail").src = thumbnailSrc;
+    template.querySelector(".review-thumbnail").alt = `${review.title} Thumbnail`;
+    template.querySelector(".review-title").textContent = review.title;
+    template.querySelector(".review-creator").textContent = review.creator;
+    template.querySelector(".review-genres").textContent = review.genres.join(", ");
+    template.querySelector(".review-short").textContent = review.short_review;
+
+    // Add score and apply correct score class
+    const scoreBadge = template.querySelector(".score-badge");
+    scoreBadge.textContent = `${review.score} / 5`;
     if (review.score >= 4) {
-      scoreClass = "high-score";
+      scoreBadge.classList.add("high-score");
     } else if (review.score >= 2.5) {
-      scoreClass = "medium-score";
+      scoreBadge.classList.add("medium-score");
     } else {
-      scoreClass = "low-score";
+      scoreBadge.classList.add("low-score");
     }
 
-    const reviewElement = document.createElement("div");
-    reviewElement.classList.add("review");
-    reviewElement.innerHTML = `
-      <img src="${thumbnailSrc}" alt="${review.title} Thumbnail" style="width:100%; border-radius: 5px;">
-      <h2>${review.title}</h2>
-      <p><strong>Creator:</strong> ${review.creator}</p>
-      <p><strong>Genres:</strong> ${review.genres.join(", ")}</p>
-      <p><strong>Score:</strong> <span class="score-badge ${scoreClass}">${review.score} / 5</span></p>
-      <p>${review.short_review}</p>
-    `;
-    reviewElement.addEventListener("click", () => showDetailedReview(review));
-    reviewsContainer.appendChild(reviewElement);
+    // Add event listener for clicking on a review
+    template.querySelector(".review").addEventListener("click", () => showDetailedReview(review));
+
+    // Append the populated template to the container
+    reviewsContainer.appendChild(template);
   });
 }
 

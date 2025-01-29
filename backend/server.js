@@ -57,6 +57,7 @@ const allQuery = (sql, params = []) => {
 };
 
 // Routes
+
 // GET all filtered reviews
 app.get("/reviews", async (req, res) => {
   try {
@@ -74,7 +75,7 @@ app.get("/reviews", async (req, res) => {
 
     console.log("Sort parameter received:", sort); // Debugging line
 
-    // Add filters
+    // filters
     if (type) {
       conditions.push("mi.type = ?");
       params.push(type);
@@ -103,18 +104,18 @@ app.get("/reviews", async (req, res) => {
       params.push(`%${searchQuery}%`, `%${searchQuery}%`);
     }
 
-    // Add conditions to the query
+    // Apply conditions
     if (conditions.length > 0) {
       sql += ` WHERE ${conditions.join(" AND ")}`;
     }
 
-    // Existing sorting logic
+    // Sorting
     if (sort === "score-desc") {
       sql += " ORDER BY mi.score DESC";
     } else if (sort === "score-asc") {
       sql += " ORDER BY mi.score ASC";
     } else {
-      sql += " ORDER BY mi.id DESC"; // Default: Recently added
+      sql += " ORDER BY mi.id DESC"; // Default
     }
 
     // Execute the query
@@ -290,13 +291,12 @@ app.put("/reviews/:id", async (req, res) => {
   }
 });
 
+// DELETE a review
 app.delete("/reviews/:id", async (req, res) => {
   const reviewId = req.params.id;
-
   try {
     // Delete related genres first
     await runQuery("DELETE FROM MediaItemGenres WHERE media_item_id = ?", [reviewId]);
-
     // Delete the review itself
     await runQuery("DELETE FROM MediaItems WHERE id = ?", [reviewId]);
 

@@ -63,7 +63,7 @@
     <div class="add-review-content">
       <h2 class="panel-title">Add New Review</h2>
       <div class="add-review-layout">
-        
+
         <!-- Left Side -->
         <div class="add-review-left">
           <label for="title">Title:</label>
@@ -113,8 +113,19 @@
         </div>
       </div>
     </div>
-  </div>  
-
+  </div>
+  
+  <template id="review-template">
+    <div class="review">
+      <img src="" alt="Thumbnail" class="review-thumbnail">
+      <h2 class="review-title"></h2>
+      <p><strong>Creator:</strong> <span class="review-creator"></span></p>
+      <p><strong>Genres:</strong> <span class="review-genres"></span></p>
+      <p><strong>Score:</strong> <span class="score-badge"></span></p>
+      <p class="review-short"></p>
+    </div>
+  </template>
+  
   <main id="reviews-container"></main>
   <script src="app.js"></script>
 </body>

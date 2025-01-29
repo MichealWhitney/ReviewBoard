@@ -1,9 +1,0 @@
-
-Future changes
---------------
-
-- remove all styling from app.js, move it into style.css
-
-- record demo video
-
-- upload everything to github and tidy up github w/ unlisted video
